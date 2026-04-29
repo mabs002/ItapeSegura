@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,51 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
-        .nav-link.active { color: #ef4444; border-bottom: 2px solid #ef4444; }
-        .modal-overlay { background-color: rgba(0,0,0,0.5); backdrop-filter: blur(2px); }
-        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        .nav-link.active {
+            color: #ef4444;
+            border-bottom: 2px solid #ef4444;
+        }
+
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+        }
+
         /* Splash Screen Animation */
         @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; visibility: hidden; }
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
         }
-        .splash-active { animation: fadeOut 0.5s ease-in-out 2.5s forwards; }
+
+        .splash-active {
+            animation: fadeOut 0.5s ease-in-out 2.5s forwards;
+        }
     </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800 overflow-x-hidden">
 
-    <!-- TELA SPLASH -->
-    <div id="splash-screen" class="fixed inset-0 z-[100] bg-slate-900 flex flex-col items-center justify-center text-white splash-active">
+    <div id="splash-screen"
+        class="fixed inset-0 z- bg-slate-900 flex flex-col items-center justify-center text-white splash-active">
         <div class="text-center animate-bounce mb-4">
             <i class="fas fa-shield-halved text-red-500 text-6xl"></i>
         </div>
@@ -33,12 +61,19 @@
             <div class="h-full bg-red-500 animate-[progress_2s_ease-in-out]"></div>
         </div>
         <style>
-            @keyframes progress { from { width: 0%; } to { width: 100%; } }
+            @keyframes progress {
+                from {
+                    width: 0%;
+                }
+
+                to {
+                    width: 100%;
+                }
+            }
         </style>
     </div>
 
-    <!-- TELA DE LOGIN -->
-    <div id="login-page" class="hidden fixed inset-0 z-[90] bg-gray-100 flex items-center justify-center p-4">
+    <div id="login-page" class="hidden fixed inset-0 z-50 bg-gray-100 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-8 space-y-6">
             <div class="text-center">
                 <i class="fas fa-shield-halved text-red-500 text-4xl mb-2"></i>
@@ -48,50 +83,59 @@
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">E-mail</label>
-                    <input type="email" id="login-email" placeholder="seu@email.com" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-red-500" required>
+                    <input type="email" id="login-email" placeholder="seu@email.com"
+                        class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-red-500" required>
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Senha</label>
-                    <input type="password" placeholder="••••••••" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-red-500" required>
+                    <input type="password" placeholder="••••••••"
+                        class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-red-500" required>
                 </div>
                 <div class="flex justify-end">
-                    <button type="button" onclick="toggleAuthPages('forgot')" class="text-xs text-red-500 font-bold hover:underline">Esqueci minha senha</button>
+                    <button type="button" onclick="toggleAuthPages('forgot')"
+                        class="text-xs text-red-500 font-bold hover:underline">Esqueci minha senha</button>
                 </div>
-                <button type="submit" class="w-full bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-slate-800 transition shadow-lg">ENTRAR</button>
+                <button type="submit"
+                    class="w-full bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-slate-800 transition shadow-lg">ENTRAR</button>
             </form>
             <div class="text-center pt-4">
-                <p class="text-sm text-gray-600">Não tem uma conta? <button onclick="toggleAuthPages('register')" class="text-red-500 font-bold hover:underline">Cadastre-se aqui</button></p>
+                <p class="text-sm text-gray-600">Não tem uma conta? <button onclick="toggleAuthPages('register')"
+                        class="text-red-500 font-bold hover:underline">Cadastre-se aqui</button></p>
             </div>
         </div>
     </div>
 
-    <!-- TELA DE ESQUECI SENHA -->
-    <div id="forgot-page" class="hidden fixed inset-0 z-[90] bg-gray-100 flex items-center justify-center p-4">
+    <div id="forgot-page" class="hidden fixed inset-0 z-50 bg-gray-100 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-8 space-y-6">
             <div class="text-center">
-                <div class="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div
+                    class="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-key text-2xl"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-slate-800">Recuperar Senha</h2>
-                <p class="text-gray-500 text-sm">Introduza o seu e-mail para receber as instruções de recuperação.</p>
+                <p class="text-gray-500 text-sm">Introduza o seu e-mail para receber as instruções.</p>
             </div>
             <form onsubmit="handleForgotPassword(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">E-mail Cadastrado</label>
-                    <input type="email" id="forgot-email" placeholder="seu@email.com" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-red-500" required>
+                    <input type="email" id="forgot-email" placeholder="seu@email.com"
+                        class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-red-500" required>
                 </div>
-                <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition shadow-lg uppercase tracking-wider text-sm">Enviar E-mail</button>
+                <button type="submit"
+                    class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition shadow-lg uppercase tracking-wider text-sm">Enviar
+                    E-mail</button>
             </form>
             <div class="text-center pt-2">
-                <button onclick="toggleAuthPages('login')" class="text-sm text-gray-500 hover:text-slate-800 font-medium">
+                <button onclick="toggleAuthPages('login')"
+                    class="text-sm text-gray-500 hover:text-slate-800 font-medium">
                     <i class="fas fa-arrow-left mr-2"></i>Voltar para o Login
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- TELA DE CADASTRO -->
-    <div id="register-page" class="hidden fixed inset-0 z-[90] bg-gray-100 flex items-center justify-center p-4 overflow-y-auto">
+    <div id="register-page"
+        class="hidden fixed inset-0 z-50 bg-gray-100 flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-white w-full max-w-lg rounded-2xl shadow-xl p-8 my-8 space-y-6">
             <div class="text-center">
                 <h2 class="text-2xl font-bold text-slate-800">Criar Nova Conta</h2>
@@ -101,21 +145,25 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] font-bold text-gray-500 uppercase">Nome Completo</label>
-                        <input type="text" id="reg-name" class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
+                        <input type="text" id="reg-name"
+                            class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-gray-500 uppercase">CPF</label>
-                        <input type="text" id="reg-cpf" placeholder="000.000.000-00" class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
+                        <input type="text" id="reg-cpf" placeholder="000.000.000-00"
+                            class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] font-bold text-gray-500 uppercase">CEP</label>
-                        <input type="text" id="reg-cep" placeholder="00000-000" class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
+                        <input type="text" id="reg-cep" placeholder="00000-000"
+                            class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-gray-500 uppercase">Tipo de Perfil</label>
-                        <select id="reg-type" class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
+                        <select id="reg-type"
+                            class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
                             <option value="cidadao">Cidadão Comum</option>
                             <option value="prestador">Prestador de Serviço</option>
                             <option value="vendedor">Vendedor</option>
@@ -124,47 +172,57 @@
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold text-gray-500 uppercase">E-mail</label>
-                    <input type="email" id="reg-email" class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
+                    <input type="email" id="reg-email"
+                        class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] font-bold text-gray-500 uppercase">Senha</label>
-                        <input type="password" class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
+                        <input type="password"
+                            class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-gray-500 uppercase">Confirmar Senha</label>
-                        <input type="password" class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
+                        <input type="password"
+                            class="w-full p-2 border rounded outline-none focus:ring-1 focus:ring-red-500" required>
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition shadow-lg">CRIAR CONTA</button>
+                <button type="submit"
+                    class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition shadow-lg">CRIAR
+                    CONTA</button>
             </form>
             <div class="text-center pt-2">
-                <p class="text-sm text-gray-600">Já tem uma conta? <button onclick="toggleAuthPages('login')" class="text-red-500 font-bold hover:underline">Faça login</button></p>
+                <p class="text-sm text-gray-600">Já tem uma conta? <button onclick="toggleAuthPages('login')"
+                        class="text-red-500 font-bold hover:underline">Faça login</button></p>
             </div>
         </div>
     </div>
 
-    <!-- CONTEÚDO PRINCIPAL (DASHBOARD) -->
     <div id="main-app" class="hidden">
-        <!-- Barra de Navegação -->
         <nav class="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
             <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-                <div class="flex items-center space-x-2" onclick="switchPage('home')" class="cursor-pointer">
+                <div class="flex items-center space-x-2 cursor-pointer" onclick="switchPage('home')">
                     <i class="fas fa-shield-halved text-red-500 text-2xl"></i>
-                    <span class="text-xl font-bold tracking-tight uppercase">Itape<span class="text-red-500">Segura</span></span>
+                    <span class="text-xl font-bold tracking-tight uppercase">Itape<span
+                            class="text-red-500">Segura</span></span>
                 </div>
                 <div class="hidden md:flex space-x-6 items-center">
-                    <button onclick="switchPage('home')" id="nav-home" class="nav-link active hover:text-red-400 transition font-medium pb-1">Início</button>
-                    <button onclick="switchPage('marketplace')" id="nav-marketplace" class="nav-link hover:text-red-400 transition font-medium pb-1">Marketplace</button>
-                    <button onclick="switchPage('services')" id="nav-services" class="nav-link hover:text-red-400 transition font-medium pb-1">Serviços</button>
+                    <button onclick="switchPage('home')" id="nav-home"
+                        class="nav-link active hover:text-red-400 transition font-medium pb-1">Início</button>
+                    <button onclick="switchPage('marketplace')" id="nav-marketplace"
+                        class="nav-link hover:text-red-400 transition font-medium pb-1">Marketplace</button>
+                    <button onclick="switchPage('services')" id="nav-services"
+                        class="nav-link hover:text-red-400 transition font-medium pb-1">Serviços</button>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div onclick="toggleCartModal()" class="relative group cursor-pointer">
                         <i class="fas fa-shopping-cart text-xl hover:text-red-500 transition"></i>
-                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold px-1.5 rounded-full">0</span>
+                        <span id="cart-count"
+                            class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold px-1.5 rounded-full">0</span>
                     </div>
                     <div onclick="switchPage('profile')" class="cursor-pointer">
-                        <img id="nav-avatar" src="" class="w-9 h-9 rounded-full border-2 border-red-500 object-cover" alt="Perfil">
+                        <img id="nav-avatar" src="" class="w-9 h-9 rounded-full border-2 border-red-500 object-cover"
+                            alt="Perfil">
                     </div>
                 </div>
             </div>
@@ -172,82 +230,114 @@
 
         <div class="container mx-auto px-4 py-6">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                
-                <!-- Coluna Lateral Esquerda -->
-                <aside class="lg:col-span-3 space-y-6" id="left-aside">
-                    <!-- O formulário aqui muda dinamicamente conforme o tipo de usuário no JS -->
-                    <div id="side-form-container" class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
-                        <div id="dynamic-form-content">
-                            <!-- Inserido dinamicamente pela função renderSidebarForm() -->
-                        </div>
-                    </div>
 
+                <aside class="lg:col-span-3 space-y-6" id="left-aside">
+                    <div id="side-form-container" class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                        <div id="dynamic-form-content"></div>
+                    </div>
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 text-center">
                         <h3 class="font-bold text-slate-700 mb-2">Comunidade Viva</h3>
-                        <p class="text-xs text-gray-500">Ajude a manter Itapetininga segura para todos os nossos jovens e famílias.</p>
+                        <p class="text-xs text-gray-500">Ajude a manter Itapetininga segura para todos os nossos jovens
+                            e famílias.</p>
                     </div>
                 </aside>
 
-                <!-- Conteúdo Central -->
                 <main id="main-content-area" class="lg:col-span-6">
-                    <!-- Home Feed -->
                     <section id="page-home" class="page-content space-y-6">
                         <h2 class="text-xl font-black text-slate-800 uppercase tracking-tight">Feed de Notícias</h2>
                         <div id="feed" class="space-y-4"></div>
                     </section>
 
-                    <!-- Marketplace -->
                     <section id="page-marketplace" class="page-content hidden space-y-6">
                         <div id="market-list-view">
-                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
-                                <h2 class="text-xl font-black text-slate-800 uppercase tracking-tight">Loja Local</h2>
-                                <div class="relative flex-1 md:max-w-xs">
-                                    <input type="text" id="search-market" onkeyup="filterMarket()" placeholder="Buscar produtos..." class="w-full pl-9 pr-4 py-2 border rounded-full text-sm outline-none focus:ring-1 focus:ring-red-500">
-                                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                            <h2 class="text-xl font-black text-slate-800 uppercase tracking-tight mb-6">Loja local</h2>
+
+                            <div
+                                class="flex flex-col md:flex-row md:items-center gap-4 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-8">
+                                <div class="relative flex-1">
+                                    <input type="text" id="search-market" onkeyup="filterMarket()"
+                                        placeholder="O que você procura?"
+                                        class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-red-500 transition">
+                                    <i class="fas fa-search absolute left-3.5 top-3 text-gray-400"></i>
+                                </div>
+
+                                <div class="flex items-center gap-3">
+                                    <button onclick="toggleCategoryFilter()" title="Categorias"
+                                        class="w-11 h-11 bg-gray-100 text-slate-700 rounded-xl font-bold hover:bg-gray-200 transition flex items-center justify-center border border-gray-200">
+                                        <i class="fas fa-filter text-red-500 text-sm"></i>
+                                    </button>
+
+                                    <button onclick="toggleProductModal(true)"
+                                        class="bg-red-600 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-red-700 transition flex items-center gap-2 shadow-lg shadow-red-100 text-sm">
+                                        <i class="fas fa-plus-circle"></i> ANUNCIAR PRODUTO
+                                    </button>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="market-list"></div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6" id="market-list"></div>
                         </div>
                         <div id="market-detail-view" class="hidden bg-white p-6 rounded-xl border shadow-sm space-y-4">
-                            <button onclick="closeActiveView('market')" class="text-blue-600 text-sm font-bold flex items-center hover:underline">
+                            <button onclick="closeActiveView('market')"
+                                class="text-blue-600 text-sm font-bold flex items-center hover:underline">
                                 <i class="fas fa-arrow-left mr-2"></i> Voltar para produtos
                             </button>
                             <div id="product-content"></div>
                         </div>
                     </section>
 
-                    <!-- Serviços -->
                     <section id="page-services" class="page-content hidden space-y-6">
                         <div id="services-list-view">
-                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
-                                <h2 class="text-xl font-black text-slate-800 uppercase tracking-tight">Profissionais</h2>
-                                <div class="relative flex-1 md:max-w-xs">
-                                    <input type="text" id="search-services" onkeyup="filterServices()" placeholder="Buscar especialidades..." class="w-full pl-9 pr-4 py-2 border rounded-full text-sm outline-none focus:ring-1 focus:ring-red-500">
-                                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                            <h2 class="text-xl font-black text-slate-800 uppercase tracking-tight mb-6">Profissionais</h2>
+
+                            <div
+                                class="flex flex-col md:flex-row md:items-center gap-4 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-8">
+                                <div class="relative flex-1">
+                                    <input type="text" id="search-services" onkeyup="filterServices()"
+                                        placeholder="Buscar especialidades (Ex: Elétrica, Segurança...)"
+                                        class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-red-500 transition">
+                                    <i class="fas fa-search absolute left-3.5 top-3 text-gray-400"></i>
+                                </div>
+
+                                <div class="flex items-center gap-3">
+                                    <button title="Filtrar"
+                                        class="w-11 h-11 bg-gray-100 text-slate-700 rounded-xl font-bold hover:bg-gray-200 transition flex items-center justify-center border border-gray-200">
+                                        <i class="fas fa-filter text-red-500 text-sm"></i>
+                                    </button>
+
+                                    <button onclick="toggleServiceModal(true)"
+                                        class="bg-red-600 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-red-700 transition flex items-center gap-2 shadow-lg shadow-red-100 text-sm">
+                                        <i class="fas fa-plus-circle"></i> OFERECER SERVIÇO
+                                    </button>
                                 </div>
                             </div>
+
                             <div id="services-list" class="space-y-4"></div>
                         </div>
-                        
-                        <!-- Interface de Chat -->
-                        <div id="chat-view" class="hidden bg-white rounded-2xl border shadow-lg flex flex-col h-[550px] animate-in slide-in-from-bottom-4 duration-300">
-                            <div class="p-4 border-b flex justify-between items-center bg-slate-900 text-white rounded-t-2xl">
+
+                        <div id="chat-view"
+                            class="hidden bg-white rounded-2xl border shadow-lg flex flex-col h-[550px]">
+                            <div
+                                class="p-4 border-b flex justify-between items-center bg-slate-900 text-white rounded-t-2xl">
                                 <div class="flex items-center gap-3">
-                                    <img id="chat-target-avatar" src="" class="w-10 h-10 rounded-full object-cover border border-slate-700">
+                                    <img id="chat-target-avatar" src=""
+                                        class="w-10 h-10 rounded-full object-cover border border-slate-700">
                                     <div>
                                         <p id="chat-target-name" class="font-bold text-sm">...</p>
                                         <p class="text-[9px] text-green-400 font-black uppercase tracking-widest">Disponível</p>
                                     </div>
                                 </div>
-                                <button onclick="closeChat()" class="w-8 h-8 flex items-center justify-center hover:bg-slate-800 rounded-full transition"><i class="fas fa-times"></i></button>
+                                <button onclick="closeChat()"
+                                    class="w-8 h-8 flex items-center justify-center hover:bg-slate-800 rounded-full transition"><i
+                                    class="fas fa-times"></i>
+                                </button>
                             </div>
-                            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar bg-slate-50">
-                                <!-- Mensagens aparecem aqui -->
-                            </div>
+                            <div id="chat-messages"class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar bg-slate-50"></div>
                             <div class="p-4 border-t bg-white rounded-b-2xl">
                                 <form onsubmit="sendMessage(event)" class="flex gap-2">
-                                    <input type="text" id="chat-input" placeholder="Escreva sua mensagem..." class="flex-1 bg-gray-100 p-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-red-500 transition">
-                                    <button type="submit" class="bg-red-600 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-lg shadow-red-100 hover:bg-red-700 transition">
+                                    <input type="text" id="chat-input" placeholder="Escreva sua mensagem..."
+                                        class="flex-1 bg-gray-100 p-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-red-500 transition">
+                                    <button type="submit"
+                                        class="bg-red-600 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-lg shadow-red-100 hover:bg-red-700 transition">
                                         <i class="fas fa-paper-plane"></i>
                                     </button>
                                 </form>
@@ -255,19 +345,24 @@
                         </div>
                     </section>
 
-                    <!-- Perfil -->
-                    <section id="page-profile" class="page-content hidden space-y-8 animate-in fade-in duration-300">
+                    <section id="page-profile" class="page-content hidden space-y-8">
                         <div id="profile-view" class="space-y-8">
                             <div class="flex flex-col md:flex-row items-center md:items-start gap-8 px-4">
                                 <div class="relative">
-                                    <img id="profile-avatar" src="" class="w-32 h-32 md:w-40 md:h-40 rounded-full border border-gray-200 p-1 object-cover">
+                                    <img id="profile-avatar" src=""
+                                        class="w-32 h-32 md:w-40 md:h-40 rounded-full border border-gray-200 p-1 object-cover">
                                 </div>
                                 <div class="flex-1 text-center md:text-left space-y-4">
                                     <div class="flex flex-col md:flex-row md:items-center gap-4">
-                                        <h3 id="profile-display-handle" class="text-2xl font-light text-slate-800 tracking-wide">...</h3>
+                                        <h3 id="profile-display-handle"
+                                            class="text-2xl font-light text-slate-800 tracking-wide">...</h3>
                                         <div class="flex gap-2 justify-center">
-                                            <button onclick="toggleEditProfileView(true)" class="px-4 py-1.5 border border-gray-300 rounded-lg text-sm font-bold hover:bg-gray-50 transition">Editar Perfil</button>
-                                            <button onclick="logout()" class="p-1.5 text-gray-600 hover:text-red-500 transition"><i class="fas fa-sign-out-alt text-lg"></i></button>
+                                            <button onclick="toggleEditProfileView(true)"
+                                                class="px-4 py-1.5 border border-gray-300 rounded-lg text-sm font-bold hover:bg-gray-50 transition">Editar
+                                                Perfil</button>
+                                            <button onclick="logout()"
+                                                class="p-1.5 text-gray-600 hover:text-red-500 transition"><i
+                                                    class="fas fa-sign-out-alt text-lg"></i></button>
                                         </div>
                                     </div>
                                     <div class="flex justify-center md:justify-start gap-6 text-sm">
@@ -277,14 +372,19 @@
                                     </div>
                                     <div class="space-y-1">
                                         <p id="profile-display-full-name" class="font-bold text-sm">...</p>
-                                        <p id="profile-display-bio" class="text-sm text-gray-600">📍 Itapetininga, SP</p>
-                                        <p id="profile-display-badge" class="inline-block px-2 py-0.5 bg-red-100 text-red-600 text-[10px] font-black uppercase rounded mt-1">...</p>
+                                        <p id="profile-display-bio" class="text-sm text-gray-600">📍 Itapetininga, SP
+                                        </p>
+                                        <p id="profile-display-badge"
+                                            class="inline-block px-2 py-0.5 bg-red-100 text-red-600 text-[10px] font-black uppercase rounded mt-1">
+                                            ...</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="border-t pt-2">
-                                <div class="flex justify-center gap-12 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                                    <button class="flex items-center gap-2 border-t border-slate-800 pt-2 -mt-2.5 text-slate-800">
+                                <div
+                                    class="flex justify-center gap-12 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                    <button
+                                        class="flex items-center gap-2 border-t border-slate-800 pt-2 -mt-2.5 text-slate-800">
                                         <i class="fas fa-th"></i> Posts
                                     </button>
                                     <button class="flex items-center gap-2 pt-2">
@@ -299,33 +399,39 @@
                                 <h3 class="font-bold text-xl border-b pb-4">Editar Perfil</h3>
                                 <div>
                                     <label class="block text-xs font-bold text-gray-500 uppercase">Nome Completo</label>
-                                    <input type="text" id="edit-full-name" class="w-full p-2 border rounded-lg text-sm outline-none">
+                                    <input type="text" id="edit-full-name"
+                                        class="w-full p-2 border rounded-lg text-sm outline-none">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-bold text-gray-500 uppercase">URL do Avatar</label>
-                                    <input type="text" id="edit-avatar-url" class="w-full p-2 border rounded-lg text-sm outline-none">
+                                    <input type="text" id="edit-avatar-url"
+                                        class="w-full p-2 border rounded-lg text-sm outline-none">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold text-gray-500 uppercase">Tipo de Perfil</label>
-                                    <select id="edit-profile-type" class="w-full p-2 border rounded-lg text-sm outline-none">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase">Tipo de
+                                        Perfil</label>
+                                    <select id="edit-profile-type"
+                                        class="w-full p-2 border rounded-lg text-sm outline-none">
                                         <option value="cidadao">Cidadão</option>
                                         <option value="prestador">Prestador de Serviço</option>
                                         <option value="vendedor">Vendedor</option>
                                     </select>
                                 </div>
                                 <div class="pt-4 flex gap-3">
-                                    <button type="button" onclick="toggleEditProfileView(false)" class="flex-1 py-2 border rounded-lg text-sm font-bold">Cancelar</button>
-                                    <button type="submit" class="flex-1 py-2 bg-red-600 text-white rounded-lg text-sm font-bold">Salvar</button>
+                                    <button type="button" onclick="toggleEditProfileView(false)"
+                                        class="flex-1 py-2 border rounded-lg text-sm font-bold">Cancelar</button>
+                                    <button type="submit"
+                                        class="flex-1 py-2 bg-red-600 text-white rounded-lg text-sm font-bold">Salvar</button>
                                 </div>
                             </form>
                         </div>
                     </section>
                 </main>
 
-                <!-- Coluna Lateral Direita -->
                 <aside class="lg:col-span-3">
                     <div class="bg-slate-900 text-white rounded-xl p-5 shadow-lg">
-                        <h3 class="font-bold mb-4 text-xs uppercase tracking-widest border-b border-slate-700 pb-2">Telefones Úteis</h3>
+                        <h3 class="font-bold mb-4 text-xs uppercase tracking-widest border-b border-slate-700 pb-2">
+                            Telefones Úteis</h3>
                         <div class="space-y-3">
                             <div class="flex justify-between items-center">
                                 <span class="text-xs text-gray-400">PM - Emergência</span>
@@ -346,97 +452,192 @@
         </div>
     </div>
 
-    <!-- MODAL DE CARRINHO E CHECKOUT -->
-    <div id="cart-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4 modal-overlay">
+    <div id="product-modal" class="hidden fixed inset-0 z- flex items-center justify-center p-4 modal-overlay">
+        <div
+            class="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-200">
+            <div class="p-6 border-b flex justify-between items-center bg-slate-900 text-white">
+                <h3 class="font-bold flex items-center gap-2"><i class="fas fa-store text-red-500"></i> Novo Anúncio
+                </h3>
+                <button onclick="toggleProductModal(false)" class="text-gray-400 hover:text-white"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <form onsubmit="handleNewMarketplaceProduct(event)" class="p-6 space-y-4">
+                <div class="grid grid-cols-1 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-400 uppercase mb-1">Nome do Produto</label>
+                        <input type="text" id="new-prod-name" placeholder="Ex: Câmera Inteligente"
+                            class="w-full p-3 bg-gray-50 border rounded-xl outline-none focus:ring-2 focus:ring-red-500"
+                            required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-400 uppercase mb-1">Descrição</label>
+                        <textarea id="new-prod-desc" placeholder="Detalhes técnicos, estado do produto..."
+                            class="w-full p-3 bg-gray-50 border rounded-xl outline-none focus:ring-2 focus:ring-red-500 h-24"
+                            required></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-400 uppercase mb-1">Categoria</label>
+                            <select id="new-prod-category"
+                                class="w-full p-3 bg-gray-50 border rounded-xl outline-none focus:ring-2 focus:ring-red-500"
+                                required>
+                                <option value="Segurança">Segurança</option>
+                                <option value="Eletrônicos">Eletrônicos</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-400 uppercase mb-1">Preço (R$)</label>
+                            <input type="number" id="new-prod-price" step="0.01" placeholder="0,00"
+                                class="w-full p-3 bg-gray-50 border rounded-xl outline-none focus:ring-2 focus:ring-red-500"
+                                required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-400 uppercase mb-1">URL da Imagem</label>
+                        <input type="url" id="new-prod-image" placeholder="https://exemplo.com/foto.jpg"
+                            class="w-full p-3 bg-gray-50 border rounded-xl outline-none focus:ring-2 focus:ring-red-500"
+                            required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-400 uppercase mb-1">Vendedor</label>
+                        <input type="text" id="new-prod-seller" placeholder="Seu nome ou Loja"
+                            class="w-full p-3 bg-gray-50 border rounded-xl outline-none focus:ring-2 focus:ring-red-500"
+                            required>
+                    </div>
+                </div>
+                <button type="submit"
+                    class="w-full bg-red-600 text-white py-4 rounded-2xl font-bold hover:bg-red-700 transition shadow-xl shadow-red-100 uppercase tracking-widest text-sm mt-2">Publicar
+                    Anúncio</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="service-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+        <div
+            class="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-200">
+            <div class="p-6 border-b flex justify-between items-center bg-slate-900 text-white">
+                <h3 class="font-bold flex items-center gap-2"><i class="fas fa-tools text-red-500"></i> Divulgar
+                    Profissional</h3>
+                <button onclick="toggleServiceModal(false)" class="text-gray-400 hover:text-white"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <form onsubmit="handleNewService(event)" class="p-6 space-y-4">
+                <div class="grid grid-cols-1 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-400 uppercase mb-1">Nome
+                            Profissional/Empresa</label>
+                        <input type="text" id="new-svc-name" placeholder="Ex: João Instalador"
+                            class="w-full p-3 bg-gray-50 border rounded-xl outline-none focus:ring-2 focus:ring-red-500"
+                            required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-400 uppercase mb-1">Especialidade</label>
+                        <input type="text" id="new-svc-role" placeholder="Ex: Eletricista de Alarmes"
+                            class="w-full p-3 bg-gray-50 border rounded-xl outline-none focus:ring-2 focus:ring-red-500"
+                            required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-400 uppercase mb-1">URL da Foto de
+                            Perfil</label>
+                        <input type="url" id="new-svc-avatar" placeholder="https://exemplo.com/sua-foto.jpg"
+                            class="w-full p-3 bg-gray-50 border rounded-xl outline-none focus:ring-2 focus:ring-red-500"
+                            required>
+                    </div>
+                </div>
+                <button type="submit"
+                    class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold hover:bg-slate-800 transition shadow-xl uppercase tracking-widest text-sm mt-2">Cadastrar
+                    Perfil</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="cart-modal" class="fixed inset-0 z- hidden flex items-center justify-center p-4 modal-overlay">
         <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            
-            <!-- Header do Modal -->
             <div class="p-4 border-b flex justify-between items-center bg-slate-900 text-white">
                 <h3 id="checkout-title" class="font-bold flex items-center gap-2">
                     <i class="fas fa-shopping-bag"></i> Seu Carrinho
                 </h3>
                 <button onclick="toggleCartModal()"><i class="fas fa-times"></i></button>
             </div>
-            
-            <!-- Etapa 1: Lista de Itens -->
             <div id="checkout-step-1" class="overflow-y-auto p-6 space-y-4 custom-scrollbar flex-1 bg-gray-50">
                 <div id="cart-items-list" class="space-y-4"></div>
             </div>
-
-            <!-- Etapa 2: Dados de Entrega e Pagamento -->
             <div id="checkout-step-2" class="hidden overflow-y-auto p-6 space-y-6 custom-scrollbar flex-1 bg-white">
                 <div>
-                    <h4 class="text-sm font-black text-slate-800 uppercase tracking-widest mb-4 border-b pb-2 flex items-center">
+                    <h4
+                        class="text-sm font-black text-slate-800 uppercase tracking-widest mb-4 border-b pb-2 flex items-center">
                         <i class="fas fa-truck text-red-500 mr-2"></i> Endereço de Entrega
                     </h4>
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
                         <div class="md:col-span-12">
-                            <input type="text" id="order-street" placeholder="Rua / Avenida" class="w-full p-3 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-red-500">
+                            <input type="text" id="order-street" placeholder="Rua / Avenida"
+                                class="w-full p-3 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-red-500">
                         </div>
                         <div class="md:col-span-4">
-                            <input type="text" id="order-number" placeholder="Número" class="w-full p-3 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-red-500">
+                            <input type="text" id="order-number" placeholder="Número"
+                                class="w-full p-3 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-red-500">
                         </div>
                         <div class="md:col-span-8">
-                            <input type="text" id="order-district" placeholder="Bairro em Itapetininga" class="w-full p-3 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-red-500">
-                        </div>
-                        <div class="md:col-span-12">
-                            <input type="text" id="order-ref" placeholder="Ponto de Referência (Opcional)" class="w-full p-3 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-red-500">
+                            <input type="text" id="order-district" placeholder="Bairro em Itapetininga"
+                                class="w-full p-3 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-red-500">
                         </div>
                     </div>
                 </div>
-
                 <div>
-                    <h4 class="text-sm font-black text-slate-800 uppercase tracking-widest mb-4 border-b pb-2 flex items-center">
+                    <h4
+                        class="text-sm font-black text-slate-800 uppercase tracking-widest mb-4 border-b pb-2 flex items-center">
                         <i class="fas fa-credit-card text-red-500 mr-2"></i> Método de Pagamento
                     </h4>
                     <div class="space-y-2">
-                        <label class="flex items-center p-3 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
-                            <input type="radio" name="payment" value="pix" class="text-red-600 focus:ring-red-500" checked>
+                        <label
+                            class="flex items-center p-3 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
+                            <input type="radio" name="payment" value="pix" class="text-red-600 focus:ring-red-500"
+                                checked>
                             <div class="ml-3 flex-1">
-                                <span class="block text-sm font-bold">PIX (Mais Rápido)</span>
-                                <span class="text-[10px] text-gray-400">Aprovação imediata pela rede segura.</span>
+                                <span class="block text-sm font-bold">PIX</span>
                             </div>
                             <i class="fab fa-pix text-cyan-500 text-xl"></i>
-                        </label>
-                        <label class="flex items-center p-3 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
-                            <input type="radio" name="payment" value="cartao" class="text-red-600 focus:ring-red-500">
-                            <div class="ml-3 flex-1">
-                                <span class="block text-sm font-bold">Cartão (na entrega)</span>
-                                <span class="text-[10px] text-gray-400">O entregador levará a maquininha.</span>
-                            </div>
-                            <i class="fas fa-mobile-alt text-gray-400 text-xl"></i>
-                        </label>
-                        <label class="flex items-center p-3 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
-                            <input type="radio" name="payment" value="dinheiro" class="text-red-600 focus:ring-red-500">
-                            <div class="ml-3 flex-1">
-                                <span class="block text-sm font-bold">Dinheiro</span>
-                                <span class="text-[10px] text-gray-400">Pagamento em espécie na entrega.</span>
-                            </div>
-                            <i class="fas fa-money-bill-wave text-green-500 text-xl"></i>
                         </label>
                     </div>
                 </div>
             </div>
-
-            <!-- Rodapé com Total e Botões de Ação -->
             <div class="p-6 border-t bg-white space-y-4">
                 <div class="flex justify-between items-center text-slate-800">
-                    <span id="total-label" class="text-sm font-medium uppercase tracking-widest text-gray-400">Total à pagar</span>
+                    <span class="text-sm font-medium uppercase tracking-widest text-gray-400">Total à pagar</span>
                     <span id="cart-total" class="text-2xl font-black text-red-600">R$ 0,00</span>
                 </div>
-                
                 <div class="flex gap-2">
-                    <button id="btn-back" onclick="goToStep(1)" class="hidden flex-1 py-4 bg-gray-100 text-gray-600 rounded-xl font-bold transition">
-                        VOLTAR
-                    </button>
-                    <button id="btn-next" onclick="goToStep(2)" class="flex-1 py-4 bg-slate-900 text-white rounded-xl font-bold shadow-lg hover:bg-slate-800 transition uppercase tracking-wider">
-                        AVANÇAR
-                    </button>
-                    <button id="btn-finalize" onclick="finalizeOrder()" class="hidden flex-1 py-4 bg-red-600 text-white rounded-xl font-bold shadow-lg shadow-red-200 hover:bg-red-700 transition uppercase tracking-wider">
-                        CONFIRMAR PEDIDO
-                    </button>
+                    <button id="btn-back" onclick="goToStep(1)"
+                        class="hidden flex-1 py-4 bg-gray-100 text-gray-600 rounded-xl font-bold transition">VOLTAR</button>
+                    <button id="btn-next" onclick="goToStep(2)"
+                        class="flex-1 py-4 bg-slate-900 text-white rounded-xl font-bold shadow-lg hover:bg-slate-800 transition uppercase">AVANÇAR</button>
+                    <button id="btn-finalize" onclick="finalizeOrder()"
+                        class="hidden flex-1 py-4 bg-red-600 text-white rounded-xl font-bold shadow-lg shadow-red-200 hover:bg-red-700 transition uppercase">CONFIRMAR
+                        PEDIDO</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="custom-category-modal"
+        class="hidden fixed inset-0 z- bg-gray-900 bg-opacity-50 flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl p-6">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h3 class="font-bold text-slate-800 flex items-center"><i class="fas fa-tag text-red-500 mr-2"></i> Nova
+                    Categoria</h3>
+            </div>
+            <form onsubmit="addCustomCategory(event)" class="space-y-4">
+                <input type="text" id="custom-category-input" placeholder="Ex: Animal solto na via..."
+                    class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-red-500 transition"
+                    required>
+                <div class="flex gap-2">
+                    <button type="button" onclick="toggleCustomCategoryModal()"
+                        class="flex-1 py-2 bg-gray-100 text-gray-600 rounded-lg font-bold">CANCELAR</button>
+                    <button type="submit"
+                        class="flex-1 py-2 bg-red-600 text-white rounded-lg font-bold">ADICIONAR</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -452,8 +653,8 @@
         ];
 
         let products = [
-            { id: 101, title: "Câmera Wi-Fi 360°", price: 249.00, seller: "Itapetininga Seg", image: "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=400", desc: "Monitore tudo pelo celular em tempo real." },
-            { id: 102, title: "Alarme com Sensor", price: 180.00, seller: "Alarmes Express", image: "https://images.unsplash.com/photo-1558002038-1037906d9974?w=400", desc: "Sirene de 120dB fácil de instalar." }
+            { id: 101, title: "Câmera Wi-Fi 360°", price: 249.00, seller: "Itapetininga Seg", image: "https://m.media-amazon.com/images/I/417H8YGi4lL._AC_SX522_.jpg", desc: "Monitore tudo pelo celular em tempo real.", category: "Segurança" },
+            { id: 102, title: "Alarme com Sensor", price: 180.00, seller: "Alarmes Express", image: "https://m.media-amazon.com/images/I/51JnOGSfJRL._AC_SY300_SX300_QL70_ML2_.jpg", desc: "Sirene de 120dB fácil de instalar.", category: "Segurança" }
         ];
 
         let professionals = [
@@ -461,7 +662,6 @@
             { id: 202, name: "Sérgio Segurança", role: "Vigilante Particular", avatar: "https://i.pravatar.cc/100?img=33", rating: 5.0 }
         ];
 
-        // --- INICIALIZAÇÃO ---
         window.onload = () => {
             setTimeout(() => {
                 document.getElementById('splash-screen').classList.add('hidden');
@@ -469,7 +669,6 @@
             }, 2500);
         };
 
-        // --- AUTH NAVIGATION ---
         function toggleAuthPages(target) {
             document.getElementById('login-page').classList.add('hidden');
             document.getElementById('register-page').classList.add('hidden');
@@ -494,28 +693,61 @@
             switchPage('home');
         }
 
-        function handleRegister(e) {
-            e.preventDefault();
-            alert("Conta criada com sucesso! Faça login para continuar.");
-            toggleAuthPages('login');
+        // --- LÓGICA DE SERVIÇO (Acrescentada) ---
+        function toggleServiceModal(show) {
+            document.getElementById('service-modal').classList.toggle('hidden', !show);
         }
 
-        function handleForgotPassword(e) {
+        function handleNewService(e) {
             e.preventDefault();
-            alert("Se o e-mail estiver cadastrado, você receberá as instruções em breve.");
-            toggleAuthPages('login');
+            const newSvc = {
+                id: Date.now(),
+                name: document.getElementById('new-svc-name').value,
+                role: document.getElementById('new-svc-role').value,
+                avatar: document.getElementById('new-svc-avatar').value,
+                rating: 5.0
+            };
+            professionals.unshift(newSvc);
+            renderServices(professionals);
+            toggleServiceModal(false);
+            e.target.reset();
         }
 
+        function toggleCustomCategoryModal() {
+            const modal = document.getElementById('custom-category-modal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                document.getElementById('custom-category-input').value = '';
+                setTimeout(() => document.getElementById('custom-category-input').focus(), 100);
+            }
+        }
+
+        function addCustomCategory(e) {
+            e.preventDefault();
+            const input = document.getElementById('custom-category-input');
+            const newCategory = input.value.trim();
+            if (!newCategory) return;
+            const customGroup = document.getElementById('custom-optgroup');
+            if (customGroup.classList.contains('hidden')) customGroup.classList.remove('hidden');
+            const newOption = document.createElement('option');
+            newOption.value = newCategory;
+            newOption.textContent = newCategory;
+            customGroup.appendChild(newOption);
+            document.getElementById('category').value = newCategory;
+            toggleCustomCategoryModal();
+        }
+
+        function handleRegister(e) { e.preventDefault(); alert("Sucesso!"); toggleAuthPages('login'); }
+        function handleForgotPassword(e) { e.preventDefault(); alert("Enviado!"); toggleAuthPages('login'); }
         function logout() { location.reload(); }
 
         function switchPage(pageId) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
             document.getElementById(`page-${pageId}`).classList.remove('hidden');
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            if(document.getElementById(`nav-${pageId}`)) document.getElementById(`nav-${pageId}`).classList.add('active');
-            
+            if (document.getElementById(`nav-${pageId}`)) document.getElementById(`nav-${pageId}`).classList.add('active');
+
             const sidebarForm = document.getElementById('side-form-container');
-            // Agora mostramos a sidebar dependendo do tipo de usuário ou página
             if (pageId === 'home' || pageId === 'marketplace' || pageId === 'services') {
                 sidebarForm.classList.remove('hidden');
                 renderSidebarForm();
@@ -523,217 +755,111 @@
                 sidebarForm.classList.add('hidden');
             }
 
-            if(pageId === 'home') renderFeed();
-            if(pageId === 'profile') renderProfileGrid();
-            if(pageId === 'marketplace') renderMarket(products);
-            if(pageId === 'services') {
+            if (pageId === 'home') renderFeed();
+            if (pageId === 'profile') renderProfileGrid();
+            if (pageId === 'marketplace') renderMarket(products);
+            if (pageId === 'services') {
                 document.getElementById('services-list-view').classList.remove('hidden');
                 document.getElementById('chat-view').classList.add('hidden');
                 renderServices(professionals);
             }
         }
 
-        // --- DINAMIC SIDEBAR FORM ---
         function renderSidebarForm() {
             const container = document.getElementById('dynamic-form-content');
             if (!currentUser) return;
-
             if (currentUser.type === 'prestador') {
-                container.innerHTML = `
-                    <h2 class="text-lg font-bold mb-4 flex items-center">
-                        <i class="fas fa-tools text-red-500 mr-2"></i> Divulgar Serviço
-                    </h2>
-                    <form onsubmit="handleServiceSubmit(event)" class="space-y-3">
-                        <input type="text" id="svc-role" placeholder="Qual sua especialidade? (Ex: Eletricista)" class="w-full p-2 bg-gray-50 border rounded-md text-sm outline-none focus:ring-1 focus:ring-red-500" required>
-                        <textarea id="svc-desc" placeholder="Breve descrição dos seus serviços..." class="w-full p-2 bg-gray-50 border rounded-md text-sm h-20 outline-none" required></textarea>
-                        <button type="submit" class="w-full bg-red-600 text-white py-2 rounded-lg font-bold hover:bg-red-700 transition text-sm uppercase">CADASTRAR SERVIÇO</button>
-                    </form>
-                `;
+                container.innerHTML = `<h2 class='text-lg font-bold mb-4'><i class='fas fa-tools text-red-500 mr-2'></i> Divulgar Serviço</h2><form onsubmit='handleServiceSubmit(event)' class='space-y-3'><input type='text' id='svc-role' placeholder='Especialidade' class='w-full p-2 border rounded-md text-sm outline-none focus:ring-1 focus:ring-red-500' required><textarea id='svc-desc' placeholder='Descrição' class='w-full p-2 border rounded-md text-sm h-20' required></textarea><button type='submit' class='w-full bg-red-600 text-white py-2 rounded-lg font-bold'>CADASTRAR</button></form>`;
             } else if (currentUser.type === 'vendedor') {
-                container.innerHTML = `
-                    <h2 class="text-lg font-bold mb-4 flex items-center">
-                        <i class="fas fa-box-open text-red-500 mr-2"></i> Anunciar Produto
-                    </h2>
-                    <form onsubmit="handleProductSubmit(event)" class="space-y-3">
-                        <input type="text" id="prod-title" placeholder="Nome do Produto" class="w-full p-2 bg-gray-50 border rounded-md text-sm outline-none focus:ring-1 focus:ring-red-500" required>
-                        <input type="number" id="prod-price" step="0.01" placeholder="Preço (R$)" class="w-full p-2 bg-gray-50 border rounded-md text-sm outline-none" required>
-                        <input type="text" id="prod-image" placeholder="URL da Imagem (Opcional)" class="w-full p-2 bg-gray-50 border rounded-md text-sm outline-none">
-                        <textarea id="prod-desc" placeholder="Detalhes do produto..." class="w-full p-2 bg-gray-50 border rounded-md text-sm h-16 outline-none" required></textarea>
-                        <button type="submit" class="w-full bg-slate-900 text-white py-2 rounded-lg font-bold hover:bg-slate-800 transition text-sm uppercase">POSTAR NO MARKETPLACE</button>
-                    </form>
-                `;
+                container.innerHTML = `<h2 class='text-lg font-bold mb-4'><i class='fas fa-box-open text-red-500 mr-2'></i> Novo Produto</h2><p class='text-xs text-gray-500'>Use o botão "Anunciar" na aba Marketplace.</p>`;
             } else {
                 container.innerHTML = `
                     <h2 class="text-lg font-bold mb-4 flex items-center">
                         <i class="fas fa-bullhorn text-red-500 mr-2"></i> Relatar Ocorrência
                     </h2>
                     <form onsubmit="handleIncidentSubmit(event)" class="space-y-3">
-                        <select id="category" class="w-full p-2 bg-gray-50 border rounded-md text-sm outline-none focus:ring-1 focus:ring-red-500" required>
-                            <option value="">Tipo de Ocorrência...</option>
-                            <optgroup label="Segurança">
-                                <option value="Atividade suspeita">Atividade suspeita</option>
-                                <option value="Assalto/Roubo">Assalto/Roubo</option>
-                                <option value="Veículo abandonado">Veículo abandonado</option>
-                            </optgroup>
-                            <optgroup label="Zeladoria">
-                                <option value="Luz de poste apagada">Luz de poste apagada</option>
-                                <option value="Cano estourado/Vazamento">Cano estourado/Vazamento</option>
-                                <option value="Buraco na via">Buraco na via</option>
-                            </optgroup>
-                        </select>
-                        <textarea id="description" placeholder="Descreva o que aconteceu..." class="w-full p-2 bg-gray-50 border rounded-md text-sm h-20 outline-none" required></textarea>
-                        <div class="space-y-2">
-                            <input type="text" id="bairro" placeholder="Bairro" class="w-full p-2 bg-gray-50 border rounded-md text-sm outline-none" required>
-                            <input type="text" id="rua" placeholder="Rua" class="w-full p-2 bg-gray-50 border rounded-md text-sm outline-none" required>
+                        <div class="flex gap-2">
+                            <select id="category" class="flex-1 p-2 bg-gray-50 border rounded-md text-sm outline-none focus:ring-1 focus:ring-red-500" required>
+                                <option value="">Tipo de Ocorrência...</option>
+                                <optgroup label="Segurança">
+                                    <option value="Atividade suspeita">Atividade suspeita</option>
+                                    <option value="Assalto/Roubo">Assalto/Roubo</option>
+                                </optgroup>
+                                <optgroup label="Zeladoria">
+                                    <option value="Luz de poste apagada">Luz de poste apagada</option>
+                                    <option value="Buraco na via">Buraco na via</option>
+                                </optgroup>
+                                <optgroup label="Personalizados" id="custom-optgroup" class="hidden"></optgroup>
+                            </select>
+                            <button type="button" onclick="toggleCustomCategoryModal()" class="px-3 bg-red-100 text-red-600 rounded-md hover:bg-red-200 transition flex items-center justify-center border border-red-200"><i class="fas fa-plus"></i></button>
                         </div>
-                        <button type="submit" class="w-full bg-slate-800 text-white py-2 rounded-lg font-bold hover:bg-slate-900 transition text-sm uppercase tracking-tighter">PUBLICAR AGORA</button>
+                        <textarea id="description" placeholder="Descreva o que aconteceu..." class="w-full p-2 bg-gray-50 border rounded-md text-sm h-20 outline-none" required></textarea>
+                        <input type="text" id="bairro" placeholder="Bairro" class="w-full p-2 bg-gray-50 border rounded-md text-sm outline-none" required>
+                        <input type="text" id="rua" placeholder="Rua" class="w-full p-2 bg-gray-50 border rounded-md text-sm outline-none" required>
+                        <button type="submit" class="w-full bg-slate-800 text-white py-2 rounded-lg font-bold hover:bg-slate-900 transition text-sm">PUBLICAR AGORA</button>
                     </form>
                 `;
             }
         }
 
-        // --- SUBMISSIONS ---
-        function handleServiceSubmit(e) {
-            e.preventDefault();
-            const role = document.getElementById('svc-role').value;
-            professionals.unshift({
-                id: Date.now(),
-                name: currentUser.fullName,
-                role: role,
-                avatar: currentUser.avatar,
-                rating: 5.0
-            });
-            alert("Seu serviço foi publicado com sucesso!");
-            e.target.reset();
-            switchPage('services');
-        }
-
-        function handleProductSubmit(e) {
-            e.preventDefault();
-            const title = document.getElementById('prod-title').value;
-            const price = parseFloat(document.getElementById('prod-price').value);
-            const image = document.getElementById('prod-image').value || "https://images.unsplash.com/photo-1581235720704-06d3acfc1366?w=400";
-            const desc = document.getElementById('prod-desc').value;
-
-            products.unshift({
-                id: Date.now(),
-                title: title,
-                price: price,
-                seller: currentUser.fullName,
-                image: image,
-                desc: desc
-            });
-            alert("Produto adicionado ao Marketplace!");
-            e.target.reset();
-            switchPage('marketplace');
-        }
-
-        function handleIncidentSubmit(e) {
-            e.preventDefault();
-            const category = document.getElementById('category').value;
-            const description = document.getElementById('description').value;
-            const bairro = document.getElementById('bairro').value;
-            const rua = document.getElementById('rua').value;
-
-            posts.unshift({
-                id: posts.length + 1,
-                user: currentUser.fullName,
-                type: category,
-                description: description,
-                bairro: bairro,
-                rua: rua,
-                date: new Date(),
-                likes: 0
-            });
-
-            renderFeed();
-            e.target.reset();
-            alert("Ocorrência publicada no feed!");
-            switchPage('home');
-        }
-
-        // --- PERFIL ---
-        function updateProfileUI() {
-            if(!currentUser) return;
-            document.getElementById('profile-display-handle').innerText = currentUser.handle;
-            document.getElementById('profile-display-full-name').innerText = currentUser.fullName;
-            document.getElementById('profile-display-bio').innerText = currentUser.bio;
-            document.getElementById('profile-avatar').src = currentUser.avatar;
-            document.getElementById('nav-avatar').src = currentUser.avatar;
-            
-            // Badge translation
-            const badges = { cidadao: "Cidadão", prestador: "Prestador de Serviço", vendedor: "Vendedor" };
-            document.getElementById('profile-display-badge').innerText = badges[currentUser.type] || "Usuário";
-            
-            // Edit fields
-            document.getElementById('edit-full-name').value = currentUser.fullName;
-            document.getElementById('edit-avatar-url').value = currentUser.avatar;
-            document.getElementById('edit-profile-type').value = currentUser.type;
-        }
-
-        function toggleEditProfileView(show) {
-            document.getElementById('profile-view').classList.toggle('hidden', show);
-            document.getElementById('profile-edit').classList.toggle('hidden', !show);
-        }
-
-        function saveProfileChanges(e) {
-            e.preventDefault();
-            currentUser.fullName = document.getElementById('edit-full-name').value;
-            currentUser.avatar = document.getElementById('edit-avatar-url').value;
-            currentUser.type = document.getElementById('edit-profile-type').value;
-            updateProfileUI();
-            renderSidebarForm(); // Atualiza a sidebar conforme o novo tipo
-            toggleEditProfileView(false);
-            alert("Perfil atualizado!");
-        }
-
-        function renderProfileGrid() {
-            const grid = document.getElementById('profile-posts-grid');
-            const userPosts = posts.filter(p => p.user === currentUser.fullName);
-            document.getElementById('count-posts').innerText = userPosts.length;
-            grid.innerHTML = userPosts.length === 0 ? '<div class="col-span-3 text-center py-10 text-gray-400">Sem posts.</div>' : userPosts.map(p => `
-                <div class="aspect-square bg-gray-200 border border-white flex items-center justify-center text-slate-400">
-                    <i class="fas fa-file-alt text-xl"></i>
-                </div>
-            `).join('');
-        }
-
-        // --- MARKETPLACE & FEED ---
-        function renderFeed() {
-            const container = document.getElementById('feed');
-            container.innerHTML = posts.map(post => `
-                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <span class="text-[10px] font-bold text-red-500 uppercase">${post.type}</span>
-                            <p class="text-sm font-bold text-slate-800">${post.user}</p>
-                        </div>
-                        <span class="text-[10px] text-gray-400">Recente</span>
-                    </div>
-                    <p class="text-sm text-gray-600 mt-2">${post.description}</p>
-                    <div class="mt-2 text-[10px] text-blue-600 font-bold bg-blue-50 w-fit px-2 py-1 rounded">
-                        <i class="fas fa-map-marker-alt"></i> ${post.bairro}
-                    </div>
-                </div>
-            `).join('');
-        }
-
+        // --- MARKETPLACE LOGIC ---
         function renderMarket(list) {
             const container = document.getElementById('market-list');
             container.innerHTML = list.map(p => `
-                <div onclick="showProduct(${p.id})" class="bg-white rounded-xl border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition">
-                    <img src="${p.image}" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <h4 class="font-bold text-xs truncate">${p.title}</h4>
-                        <p class="text-red-600 font-black text-sm mt-1">R$ ${p.price.toFixed(2)}</p>
+                <div onclick="showProduct(${p.id})" class="group bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest text-red-600 shadow-sm border border-red-50">
+                            ${p.category || 'Geral'}
+                        </span>
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-base leading-tight truncate">${p.title}</h4>
+                            <div class="flex items-center gap-1 mt-1">
+                                <i class="fas fa-store text-[10px] text-gray-400"></i>
+                                <span class="text-[10px] text-gray-500 font-medium">${p.seller}</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed h-8">${p.desc}</p>
+                        <div class="flex items-center justify-between pt-2">
+                            <span class="text-red-600 font-black text-xl">R$ ${p.price.toFixed(2)}</span>
+                            <button class="w-8 h-8 rounded-lg bg-gray-50 text-slate-400 flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `).join('');
+        }
+
+        function toggleProductModal(show) {
+            const modal = document.getElementById('product-modal');
+            modal.classList.toggle('hidden', !show);
+            document.body.style.overflow = show ? 'hidden' : 'auto';
+        }
+
+        function handleNewMarketplaceProduct(e) {
+            e.preventDefault();
+            const newProd = {
+                id: Date.now(),
+                title: document.getElementById('new-prod-name').value,
+                desc: document.getElementById('new-prod-desc').value,
+                category: document.getElementById('new-prod-category').value,
+                price: parseFloat(document.getElementById('new-prod-price').value),
+                image: document.getElementById('new-prod-image').value,
+                seller: document.getElementById('new-prod-seller').value
+            };
+            products.unshift(newProd);
+            renderMarket(products);
+            toggleProductModal(false);
+            e.target.reset();
+            alert("Anúncio criado com sucesso!");
         }
 
         function filterMarket() {
             const query = document.getElementById('search-market').value.toLowerCase();
-            const filtered = products.filter(p => p.title.toLowerCase().includes(query));
+            const filtered = products.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
             renderMarket(filtered);
         }
 
@@ -742,207 +868,125 @@
             document.getElementById('market-list-view').classList.add('hidden');
             document.getElementById('market-detail-view').classList.remove('hidden');
             document.getElementById('product-content').innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <img src="${p.image}" class="w-full h-64 object-cover rounded-xl shadow">
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-black text-slate-800">${p.title}</h3>
-                        <p class="text-red-600 font-black text-3xl">R$ ${p.price.toFixed(2)}</p>
-                        <p class="text-gray-500 text-sm">${p.desc}</p>
-                        <button onclick="addCart(${p.id})" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold">ADICIONAR AO CARRINHO</button>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="relative"><img src="${p.image}" class="w-full h-80 object-cover rounded-2xl shadow-lg"></div>
+                    <div class="space-y-6">
+                        <div>
+                            <span class="text-xs font-black text-red-500 uppercase">${p.category}</span>
+                            <h3 class="text-3xl font-black text-slate-800">${p.title}</h3>
+                            <p class="text-sm text-gray-400 mt-1">Vendido por: <b>${p.seller}</b></p>
+                        </div>
+                        <p class="text-red-600 font-black text-4xl">R$ ${p.price.toFixed(2)}</p>
+                        <p class="text-gray-500 leading-relaxed">${p.desc}</p>
+                        <button onclick="addCart(${p.id})" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-xl hover:bg-slate-800 transition">ADICIONAR AO CARRINHO</button>
                     </div>
                 </div>
             `;
         }
 
         function closeActiveView(type) {
-            if(type === 'market') {
+            if (type === 'market') {
                 document.getElementById('market-list-view').classList.remove('hidden');
                 document.getElementById('market-detail-view').classList.add('hidden');
             }
         }
 
-        function renderServices(list) {
-            const container = document.getElementById('services-list');
-            container.innerHTML = list.map(pro => `
-                <div class="bg-white p-4 rounded-xl flex items-center justify-between border border-gray-100 shadow-sm transition hover:border-red-100">
-                    <div class="flex items-center space-x-4">
-                        <img src="${pro.avatar}" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <h4 class="font-bold text-slate-800">${pro.name}</h4>
-                            <p class="text-xs text-blue-600 font-bold uppercase tracking-tight">${pro.role}</p>
-                        </div>
+        // --- OUTRAS FUNÇÕES ORIGINAIS ---
+        function renderFeed() {
+            const container = document.getElementById('feed');
+            container.innerHTML = posts.map(post => `
+                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                    <div class="flex justify-between items-start">
+                        <div><span class="text-[10px] font-bold text-red-500 uppercase">${post.type}</span><p class="text-sm font-bold text-slate-800">${post.user}</p></div>
+                        <span class="text-[10px] text-gray-400">Recente</span>
                     </div>
-                    <button onclick="openChat(${pro.id})" class="bg-slate-800 text-white px-5 py-2 rounded-lg text-xs font-bold hover:bg-slate-900 transition">CONTATAR</button>
+                    <p class="text-sm text-gray-600 mt-2">${post.description}</p>
+                    <div class="mt-2 text-[10px] text-blue-600 font-bold bg-blue-50 w-fit px-2 py-1 rounded"><i class="fas fa-map-marker-alt mr-1"></i> ${post.bairro}</div>
                 </div>
             `).join('');
         }
 
-        function filterServices() {
-            const query = document.getElementById('search-services').value.toLowerCase();
-            const filtered = professionals.filter(p => p.name.toLowerCase().includes(query) || p.role.toLowerCase().includes(query));
-            renderServices(filtered);
+        function renderServices(list) {
+            const container = document.getElementById('services-list');
+            container.innerHTML = list.map(pro => `
+                <div class="bg-white p-4 rounded-xl flex items-center justify-between border border-gray-100 shadow-sm">
+                    <div class="flex items-center space-x-4">
+                        <img src="${pro.avatar}" class="w-12 h-12 rounded-full object-cover">
+                        <div><h4 class="font-bold text-slate-800">${pro.name}</h4><p class="text-xs text-blue-600 font-bold uppercase">${pro.role}</p></div>
+                    </div>
+                    <button onclick="openChat(${pro.id})" class="bg-slate-800 text-white px-5 py-2 rounded-lg text-xs font-bold">CONTATAR</button>
+                </div>
+            `).join('');
         }
 
-        // --- SISTEMA DE CHAT ---
         function openChat(profId) {
             activeChatProfessional = professionals.find(p => p.id === profId);
             document.getElementById('services-list-view').classList.add('hidden');
             document.getElementById('chat-view').classList.remove('hidden');
-            
             document.getElementById('chat-target-name').innerText = activeChatProfessional.name;
             document.getElementById('chat-target-avatar').src = activeChatProfessional.avatar;
-            
-            const messagesContainer = document.getElementById('chat-messages');
-            messagesContainer.innerHTML = `
-                <div class="flex flex-col items-center my-4">
-                    <span class="text-[10px] bg-gray-200 text-gray-500 px-3 py-1 rounded-full uppercase font-bold tracking-widest">Início da Conversa</span>
-                </div>
-                <div class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-700 w-fit max-w-[85%] border border-gray-100">
-                    Olá! Sou o <b>${activeChatProfessional.name}</b>. Como posso ajudar você hoje com serviços de ${activeChatProfessional.role} aqui em Itapetininga?
-                </div>
-            `;
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            const container = document.getElementById('chat-messages');
+            container.innerHTML = `<div class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-sm border border-gray-100">Olá! Sou o <b>${activeChatProfessional.name}</b>. Como posso ajudar?</div>`;
         }
 
-        function closeChat() {
-            document.getElementById('services-list-view').classList.remove('hidden');
-            document.getElementById('chat-view').classList.add('hidden');
-            activeChatProfessional = null;
-        }
+        function closeChat() { document.getElementById('services-list-view').classList.remove('hidden'); document.getElementById('chat-view').classList.add('hidden'); }
 
         function sendMessage(e) {
             e.preventDefault();
             const input = document.getElementById('chat-input');
-            const msgText = input.value.trim();
-            if(!msgText) return;
-
+            if (!input.value.trim()) return;
             const container = document.getElementById('chat-messages');
-            
-            container.innerHTML += `
-                <div class="flex flex-col items-end">
-                    <div class="bg-red-600 text-white p-4 rounded-2xl rounded-tr-none shadow-md text-sm w-fit max-w-[85%]">
-                        ${msgText}
-                    </div>
-                    <span class="text-[9px] text-gray-400 mt-1 uppercase font-bold">Enviado agora</span>
-                </div>
-            `;
-            
+            container.innerHTML += `<div class="flex flex-col items-end"><div class="bg-red-600 text-white p-4 rounded-2xl rounded-tr-none text-sm">${input.value}</div></div>`;
             input.value = "";
             container.scrollTop = container.scrollHeight;
-
-            setTimeout(() => {
-                if(!activeChatProfessional) return;
-                container.innerHTML += `
-                    <div class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-700 w-fit max-w-[85%] border border-gray-100">
-                        Entendido! Vou verificar minha disponibilidade e te respondo em instantes. 👍
-                    </div>
-                `;
-                container.scrollTop = container.scrollHeight;
-            }, 1200);
-        }
-
-        // --- SISTEMA DE CARRINHO E CHECKOUT ---
-        function toggleCartModal() {
-            const modal = document.getElementById('cart-modal');
-            modal.classList.toggle('hidden');
-            if(!modal.classList.contains('hidden')) {
-                goToStep(1); 
-                renderCart();
-            }
         }
 
         function addCart(id) {
             const p = products.find(prod => prod.id === id);
             cart.push({ ...p, uniqueId: Date.now() });
             document.getElementById('cart-count').innerText = cart.length;
-            alert(`"${p.title}" está no carrinho!`);
-        }
-
-        function removeFromCart(uid) {
-            cart = cart.filter(item => item.uniqueId !== uid);
-            document.getElementById('cart-count').innerText = cart.length;
-            renderCart();
+            alert(`"${p.title}" adicionado!`);
         }
 
         function renderCart() {
             const list = document.getElementById('cart-items-list');
             const total = cart.reduce((acc, curr) => acc + curr.price, 0);
-            
-            if (cart.length === 0) {
-                list.innerHTML = `<p class="text-center text-gray-400 py-10">Carrinho vazio.</p>`;
-                document.getElementById('cart-total').innerText = "R$ 0,00";
-                return;
-            }
-
-            list.innerHTML = cart.map(item => `
-                <div class="flex items-center gap-4 bg-white p-3 rounded-xl border shadow-sm">
-                    <img src="${item.image}" class="w-12 h-12 rounded-lg object-cover">
-                    <div class="flex-1">
-                        <h4 class="font-bold text-xs truncate">${item.title}</h4>
-                        <p class="text-red-600 font-bold text-sm">R$ ${item.price.toFixed(2)}</p>
-                    </div>
-                    <button onclick="removeFromCart(${item.uniqueId})" class="text-gray-300 hover:text-red-500 transition">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </div>
-            `).join('');
+            if (cart.length === 0) { list.innerHTML = `<p class="text-center text-gray-400 py-10">Carrinho vazio.</p>`; document.getElementById('cart-total').innerText = "R$ 0,00"; return; }
+            list.innerHTML = cart.map(item => `<div class="flex items-center gap-4 bg-white p-3 rounded-xl border shadow-sm"><img src="${item.image}" class="w-12 h-12 rounded-lg object-cover"><div class="flex-1"><h4 class="font-bold text-xs truncate">${item.title}</h4><p class="text-red-600 font-bold text-sm">R$ ${item.price.toFixed(2)}</p></div><button onclick="removeFromCart(${item.uniqueId})" class="text-gray-300 hover:text-red-500"><i class="fas fa-trash-alt"></i></button></div>`).join('');
             document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2)}`;
         }
 
-        function goToStep(step) {
-            if (step === 2 && cart.length === 0) return alert("Seu carrinho está vazio!");
-
-            const s1 = document.getElementById('checkout-step-1');
-            const s2 = document.getElementById('checkout-step-2');
-            const bBack = document.getElementById('btn-back');
-            const bNext = document.getElementById('btn-next');
-            const bFinal = document.getElementById('btn-finalize');
-            const title = document.getElementById('checkout-title');
-
-            if (step === 1) {
-                s1.classList.remove('hidden');
-                s2.classList.add('hidden');
-                bBack.classList.add('hidden');
-                bNext.classList.remove('hidden');
-                bFinal.classList.add('hidden');
-                title.innerHTML = '<i class="fas fa-shopping-bag"></i> Seu Carrinho';
-            } else {
-                s1.classList.add('hidden');
-                s2.classList.remove('hidden');
-                bBack.classList.remove('hidden');
-                bNext.classList.add('hidden');
-                bFinal.classList.remove('hidden');
-                title.innerHTML = '<i class="fas fa-truck"></i> Finalizar Pedido';
-            }
+        function removeFromCart(uid) { cart = cart.filter(i => i.uniqueId !== uid); document.getElementById('cart-count').innerText = cart.length; renderCart(); }
+        function toggleCartModal() { const m = document.getElementById('cart-modal'); m.classList.toggle('hidden'); if (!m.classList.contains('hidden')) { goToStep(1); renderCart(); } }
+        function goToStep(s) {
+            const s1 = document.getElementById('checkout-step-1'), s2 = document.getElementById('checkout-step-2'), bBack = document.getElementById('btn-back'), bNext = document.getElementById('btn-next'), bFinal = document.getElementById('btn-finalize');
+            if (s === 1) { s1.classList.remove('hidden'); s2.classList.add('hidden'); bBack.classList.add('hidden'); bNext.classList.remove('hidden'); bFinal.classList.add('hidden'); }
+            else { s1.classList.add('hidden'); s2.classList.remove('hidden'); bBack.classList.remove('hidden'); bNext.classList.add('hidden'); bFinal.classList.remove('hidden'); }
         }
 
         function finalizeOrder() {
-            const street = document.getElementById('order-street').value;
-            const number = document.getElementById('order-number').value;
-            const district = document.getElementById('order-district').value;
-            const payment = document.querySelector('input[name="payment"]:checked').value;
-
-            if (!street || !number || !district) {
-                return alert("Por favor, preencha os dados de endereço para a entrega.");
-            }
-
             const btn = document.getElementById('btn-finalize');
-            btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> PROCESSANDO...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                alert(`PEDIDO CONFIRMADO!\n\nObrigado por apoiar o comércio de Itapetininga!`);
-                cart = [];
-                document.getElementById('cart-count').innerText = "0";
-                toggleCartModal();
-                btn.innerHTML = 'CONFIRMAR PEDIDO';
-                btn.disabled = false;
-                
-                document.getElementById('order-street').value = "";
-                document.getElementById('order-number').value = "";
-                document.getElementById('order-district').value = "";
-            }, 2000);
+            btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i>';
+            setTimeout(() => { alert("Pedido confirmado!"); cart = []; document.getElementById('cart-count').innerText = "0"; toggleCartModal(); btn.innerHTML = 'CONFIRMAR PEDIDO'; }, 2000);
         }
+
+        function updateProfileUI() {
+            document.getElementById('profile-display-handle').innerText = currentUser.handle;
+            document.getElementById('profile-display-full-name').innerText = currentUser.fullName;
+            document.getElementById('profile-avatar').src = currentUser.avatar;
+            document.getElementById('nav-avatar').src = currentUser.avatar;
+            document.getElementById('profile-display-badge').innerText = currentUser.type.toUpperCase();
+        }
+
+        function renderProfileGrid() {
+            const container = document.getElementById('profile-posts-grid');
+            container.innerHTML = `<div class="aspect-square bg-gray-100 flex items-center justify-center"><i class="fas fa-camera text-gray-300"></i></div>`;
+        }
+
+        function toggleEditProfileView(show) { document.getElementById('profile-view').classList.toggle('hidden', show); document.getElementById('profile-edit').classList.toggle('hidden', !show); }
+        function handleIncidentSubmit(e) { e.preventDefault(); alert("Relato enviado!"); e.target.reset(); switchPage('home'); }
     </script>
+
 </body>
+
 </html>
